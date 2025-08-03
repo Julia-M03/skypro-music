@@ -1,0 +1,73 @@
+.filter__button {
+  font-style: normal;
+  font-weight: 400;
+  font-size: 16px;
+  line-height: 24px;
+  border: 1px solid #ffffff;
+  border-radius: 60px;
+  padding: 6px 20px;
+  color: white;
+  margin: 0;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.filter__button_active {
+  border-color: #b672ff;
+  color: #b672ff;
+}
+
+.filter__dropdown {
+  position: absolute;
+  margin-top: 10px;
+  width: max-content;
+  max-height: 305px;
+  -webkit-box-sizing: border-box;
+  padding: 34px;
+  border-radius: 12px;
+  background: #313131;
+}
+
+.filter__list {
+  color: white;
+  display: flex;
+  gap: 28px;
+  height: max-content;
+  max-height: 237px;
+  overflow-y: auto;
+  flex-direction: column;
+  width: max-content;
+  max-width: 248px;
+
+  &::-webkit-scrollbar {
+    width: 4px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background-color: rgba(75, 73, 73, 1);
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: white;
+  }
+}
+
+.filter__list_element {
+  color: #fff;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: 24px;
+  padding-right: 20px;
+}
+
+.filter__list_element:hover {
+  color: #b672ff;
+  text-decoration-line: underline;
+}
+
+.filter__button_group {
+  position: relative;
+  cursor: pointer;
+}
