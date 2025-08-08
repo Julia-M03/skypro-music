@@ -1,36 +1,107 @@
+"use client"
 import Link from "next/link";
 import styles from "./bar.module.css";
 import classNames from "classnames";
+import { useAppDispatch, useAppSelector } from "@/store/store";
+import { useEffect, useRef } from "react";
+import { togglePlay } from "@/store/features/trackSlice";
 
 export default function Bar() {
+  const dispatch = useAppDispatch();
+  const audioRef = useRef<HTMLAudioElement | null>(null)
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      dispatch(togglePlay());
+    };
+
+    audio.addEventListener("ended", handleEnded);
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [dispatch]);
+
+  const isPlaying = useAppSelector(
+    (state) => state.tracks.currentTrack.isPlaying
+  );
+
+  const currentTrack = useAppSelector(
+    (state) => state.tracks.currentTrack.track
+  );
+
+  useEffect(() => {
+    if (audioRef.current && currentTrack && isPlaying) {
+      audioRef.current.play().catch((err) => {
+        console.warn("Autoplay failed", err);
+      });
+    }
+  }, [currentTrack, isPlaying]);
+
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (!audio) return;
+
+    const handleEnded = () => {
+      dispatch(togglePlay());
+    };
+
+    audio.addEventListener("ended", handleEnded);
+    return () => {
+      audio.removeEventListener("ended", handleEnded);
+    };
+  }, [dispatch]);
+
+  if (!currentTrack) {
+    return null;
+  }
+
+  const handlePlayPause = () => {
+    if (audioRef.current) {
+      if (audioRef.current.paused) {
+        audioRef.current.play();
+      } else {
+        audioRef.current.pause();
+      }
+      dispatch(togglePlay());
+    }
+  };
+
+  const handlerOtherButtons = () => {
+    alert("Еще не реализовано");
+  };
+
   return (
     <div className={styles.bar}>
+      <audio ref={audioRef} controls src={currentTrack?.track_file}></audio>
       <div className={styles.bar__content}>
         <div className={styles.bar__playerProgress}></div>
         <div className={styles.bar__playerBlock}>
           <div className={styles.bar__player}>
             <div className={styles.player__controls}>
-              <div className={styles.player__btnPrev}>
+              <div className={styles.player__btnPrev} onClick={handlerOtherButtons}>
                 <svg className={styles.player__btnPrevSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-prev"></use>
                 </svg>
               </div>
-              <div className={classNames(styles.player__btnPlay, styles.btn)}>
+              <div className={classNames(styles.player__btnPlay, styles.btn)} onClick={handlePlayPause}>
                 <svg className={styles.player__btnPlaySvg}>
-                  <use xlinkHref="/img/icon/sprite.svg#icon-play"></use>
+                  <use xlinkHref={`/img/icon/sprite.svg#icon-${isPlaying ? "pause" : "play"}`} />
                 </svg>
               </div>
-              <div className={styles.player__btnNext}>
+              <div className={styles.player__btnNext} onClick={handlerOtherButtons}>
                 <svg className={styles.player__btnNextSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-next"></use>
                 </svg>
               </div>
               <div className={classNames(styles.player__btnRepeat, styles.btnIcon)}>
-                <svg className={styles.player__btnRepeatSvg}>
+                <svg className={styles.player__btnRepeatSvg} onClick={handlerOtherButtons}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-repeat"></use>
                 </svg>
               </div>
-              <div className={classNames(styles.player__btnShuffle, styles.btnIcon)}>
+              <div className={classNames(styles.player__btnShuffle, styles.btnIcon)} onClick={handlerOtherButtons}>
                 <svg className={styles.player__btnShuffleSvg}>
                   <use xlinkHref="/img/icon/sprite.svg#icon-shuffle"></use>
                 </svg>
@@ -46,12 +117,12 @@ export default function Bar() {
                 </div>
                 <div className={styles.trackPlay__author}>
                   <Link className={styles.trackPlay__authorLink} href="">
-                    Ты та...
+                    {currentTrack.name}
                   </Link>
                 </div>
                 <div className={styles.trackPlay__album}>
                   <Link className={styles.trackPlay__albumLink} href="">
-                    Баста
+                    {currentTrack.author}
                   </Link>
                 </div>
               </div>
