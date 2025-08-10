@@ -10,6 +10,14 @@ export default function Bar() {
   const dispatch = useAppDispatch();
   const audioRef = useRef<HTMLAudioElement | null>(null)
 
+  const isPlaying = useAppSelector(
+    (state) => state.tracks.currentTrack.isPlaying
+  );
+
+  const currentTrack = useAppSelector(
+    (state) => state.tracks.currentTrack.track
+  );
+
   useEffect(() => {
     const audio = audioRef.current;
     if (!audio) return;
@@ -23,14 +31,6 @@ export default function Bar() {
       audio.removeEventListener("ended", handleEnded);
     };
   }, [dispatch]);
-
-  const isPlaying = useAppSelector(
-    (state) => state.tracks.currentTrack.isPlaying
-  );
-
-  const currentTrack = useAppSelector(
-    (state) => state.tracks.currentTrack.track
-  );
 
   useEffect(() => {
     if (audioRef.current && currentTrack && isPlaying) {
@@ -75,7 +75,7 @@ export default function Bar() {
 
   return (
     <div className={styles.bar}>
-      <audio ref={audioRef} controls src={currentTrack?.track_file}></audio>
+      <audio className={styles.bar__audio} ref={audioRef} controls src={currentTrack?.track_file}></audio>
       <div className={styles.bar__content}>
         <div className={styles.bar__playerProgress}></div>
         <div className={styles.bar__playerBlock}>
