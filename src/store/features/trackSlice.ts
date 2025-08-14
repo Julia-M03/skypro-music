@@ -64,10 +64,13 @@ const trackSlice = createSlice({
       const currentIndex = playList.findIndex(
         (track) => track._id === state.currentTrack?.track?._id
       );
-      const nextIndex = currentIndex + 1;
+      let nextIndex = currentIndex + 1;
 
       if (!playList[nextIndex]) {
-        state.currentTrack.isPlaying = false;
+        if (state.isShuffle)
+          nextIndex = 0;
+        else
+          state.currentTrack.isPlaying = false;
       }
       state.currentTrack.track = playList[nextIndex]
         ? playList[nextIndex]
@@ -91,5 +94,5 @@ const trackSlice = createSlice({
   },
 });
 
-export const { setTracks, setCurrentTrack, togglePlay, stopPlayback, setCurrentPlaylist, setNextTrack, setPrevTrack, toggleShuffle, setCurrentTrackList,} = trackSlice.actions;
+export const { setTracks, setCurrentTrack, togglePlay, stopPlayback, setCurrentPlaylist, setNextTrack, setPrevTrack, toggleShuffle, setCurrentTrackList, } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;
