@@ -1,8 +1,10 @@
+import { TrackType } from "@/sharedTypes/sharedTypes";
 import FilterItem from "../FilterItem/FilterItem";
 import Search from "../Search/Search";
-import Tracks from "../Tracks/Tracks";
 import styles from "./centerblock.module.css";
 import classNames from "classnames";
+import { data } from "@/data";
+import Track from "../Track/Track";
 
 
 export default function CenterBlock() {
@@ -26,8 +28,11 @@ export default function CenterBlock() {
                         </svg>
                     </div>
                 </div>
-
-                <Tracks />
+                <div className={styles.content__playlist}>
+                    {data.map((track: TrackType) => (
+                        <Track key={track._id} track={track} playList={data} />
+                    ))}
+                </div>
             </div>
         </div>
     );
