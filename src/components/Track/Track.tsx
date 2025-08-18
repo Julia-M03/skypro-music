@@ -1,28 +1,38 @@
 "use client"
 import Link from "next/link";
 import styles from "./track.module.css";
-import { setCurrentTrack } from "@/store/features/trackSlice";
+import { setCurrentPlaylist, setCurrentTrack } from "@/store/features/trackSlice";
 import { useAppDispatch, useAppSelector } from "@/store/store";
 import { formatTime } from "@/utils/helpers";
 import { TrackType } from "@/sharedTypes/sharedTypes";
 import classNames from "classnames";
 
 
-export default function Track(track: TrackType) {
+type TrackProps = {
+  track: TrackType;
+  playList: TrackType[];
+};
+
+export default function Track({ track, playList }: TrackProps) {
     const dispatch = useAppDispatch();
     const currentTrack = useAppSelector((state) => state.tracks.currentTrack.track);
     const isPlaying = useAppSelector((state) => state.tracks.currentTrack.isPlaying);
     const isCurrentTrack = currentTrack?._id === track._id;
 
+    const onClickCurrentTrack = () => {
+        dispatch(setCurrentTrack(track));
+        dispatch(setCurrentPlaylist(playList));
+    };
+
     return (
-        <div className={styles.playlist__item} onClick={() => dispatch(setCurrentTrack(track))}>
+        <div className={styles.playlist__item} onClick={onClickCurrentTrack}>
             <div className={styles.playlist__track}>
                 <div className={styles.track__title}>
                     <div className={styles.track__titleImage}>
                         {isCurrentTrack ? (
                             <img className={classNames({ [styles.track__titleImg]: isPlaying, })}
-                                 src="/img/icon/current.svg"
-                                 alt={track.name}
+                                src="/img/icon/current.svg"
+                                alt={track.name}
                             />
                         ) : (
                             <svg className={styles.track__titleSvg}>
