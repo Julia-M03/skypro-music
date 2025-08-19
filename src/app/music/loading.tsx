@@ -2,7 +2,7 @@ import styles from "./loading.module.css";
 
 export default function Loading() {
   return (
-    <div className={styles.loading}> Загруска </div>
+    <div className={styles.loading}> Загрузка </div>
   )
 }
 
