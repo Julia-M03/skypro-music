@@ -1,13 +1,23 @@
 import styles from "./tracks.module.css";
 import { TrackType } from "@/sharedTypes/sharedTypes";
 import Track from "../Track/Track";
-import { data } from "@/data";
+import { useSelector } from "react-redux";
+import { RootState } from "@/store/store";
 
-export default function Tracks() {
+type TrackListProps = {
+    selectId?: number;
+    tracks?: TrackType[];
+}
+
+export default function Tracks({ selectId }: TrackListProps) {
+    const tracks = useSelector(
+        (state: RootState): TrackType[] => state.tracks.currentTrackList
+    );
+
     return (
         <div className={styles.content__playlist}>
-            {data.map((track: TrackType) => (
-                <Track key={track._id} track={track} playList={data} />
+            {tracks.map((track: TrackType) => (
+                <Track key={track._id} track={track} playList={tracks} />
             ))}
         </div>
     )

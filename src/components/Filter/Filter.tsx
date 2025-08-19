@@ -8,13 +8,12 @@ type FilterProps = {
   onClick: (name: string | null) => void;
   activeFilter: string | null;
   filterName: keyof TrackType;
-};
+}
 
 export default function Filter({ name, activeFilter, filterName, onClick }: FilterProps) {
   return (
     <div className={styles.filter__button_group}>
-      <div
-        className={`${styles.filter__button} ${activeFilter === name ? styles.filter__button_active : ""}`}
+      <div className={`${styles.filter__button} ${activeFilter === name ? styles.filter__button_active : ""}`}
         onClick={() => onClick(name)}> {name} </div>
       {activeFilter === name && (
         <div className={styles.filter__dropdown}>
@@ -33,5 +32,5 @@ export default function Filter({ name, activeFilter, filterName, onClick }: Filt
         </div>
       )}
     </div>
-  );
-};
+  )
+}
