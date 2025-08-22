@@ -7,6 +7,7 @@ import { useEffect, useRef, useState } from "react";
 import { setNextTrack, setPrevTrack, togglePlay, toggleShuffle } from "@/store/features/trackSlice";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import { getTimePanel } from "@/utils/helpers";
+import { useLikeTrack } from "@/hooks/useLikeTracks";
 
 export default function Bar() {
   const dispatch = useAppDispatch();
@@ -24,6 +25,10 @@ export default function Bar() {
   const currentTrack = useAppSelector(
     (state) => state.tracks.currentTrack.track
   );
+
+  const { accessToken } = useAppSelector((state) => state.auth);
+  
+  const { toggleLike, isLike } = useLikeTrack(currentTrack);
 
   useEffect(() => {
     setIsLoadedTrack(false);
@@ -132,6 +137,14 @@ export default function Bar() {
     dispatch(toggleShuffle());
   };
 
+  const likeIcon = () => {
+    if (!accessToken) {
+      return "dislike-notauth";
+    } else {
+      return isLike ? "like" : "dislike";
+    }
+  };
+
   return (
     <div className={styles.bar}>
       <audio
@@ -207,10 +220,10 @@ export default function Bar() {
                 </div>
               </div>
 
-              <div className={styles.trackPlay__dislike}>
+              <div className={styles.trackPlay__dislike} onClick={toggleLike}>
                 <div className={classNames(styles.player__btnShuffle, styles.btnIcon)}>
                   <svg className={styles.trackPlay__likeSvg}>
-                    <use xlinkHref="/img/icon/sprite.svg#icon-like" />
+                    <use xlinkHref={`/img/icon/sprite_2.svg#icon-${likeIcon()}`} />
                   </svg>
                 </div>
                 <div className={classNames(styles.trackPlay__dislike, styles.btnIcon)}>

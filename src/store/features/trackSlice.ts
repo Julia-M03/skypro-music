@@ -1,6 +1,7 @@
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
 import { TrackType } from "../../sharedTypes/sharedTypes";
 
+
 type TrackState = {
   tracks: TrackType[];
   currentTrack: {
@@ -11,6 +12,9 @@ type TrackState = {
   playList: TrackType[];
   shuffledPlayList: TrackType[];
   isShuffle: boolean;
+  favoriteTracks: TrackType[];
+  fetchError: null | string;
+  fetchLoading: boolean;
 };
 
 const initialState: TrackState = {
@@ -23,6 +27,9 @@ const initialState: TrackState = {
   playList: [],
   shuffledPlayList: [],
   isShuffle: false,
+  favoriteTracks: [],
+  fetchError: null,
+  fetchLoading: false,
 };
 
 const trackSlice = createSlice({
@@ -45,7 +52,17 @@ const trackSlice = createSlice({
         () => Math.random() - 0.5,
       );
     },
-
+    setFavoriteTracks(state, action: PayloadAction<TrackType[]>) {
+      state.favoriteTracks = action.payload;
+    },
+    addLikedTracks(state, action: PayloadAction<TrackType>) {
+      state.favoriteTracks = [...state.favoriteTracks, action.payload];
+    },
+    removeLikedTracks(state, action: PayloadAction<TrackType>) {
+      state.favoriteTracks = state.favoriteTracks.filter(
+        (track) => track._id !== action.payload._id
+      );
+    },
     togglePlay: (state, action: PayloadAction<boolean | undefined>) => {
       state.currentTrack.isPlaying =
         action.payload === undefined
@@ -94,5 +111,5 @@ const trackSlice = createSlice({
   },
 });
 
-export const { setTracks, setCurrentTrack, togglePlay, stopPlayback, setCurrentPlaylist, setNextTrack, setPrevTrack, toggleShuffle, setCurrentTrackList, } = trackSlice.actions;
+export const { setTracks, setCurrentTrack, togglePlay, stopPlayback, setCurrentPlaylist, setNextTrack, setPrevTrack, toggleShuffle, setCurrentTrackList, setFavoriteTracks, addLikedTracks, removeLikedTracks } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;

@@ -1,3 +1,5 @@
+"use client";
+
 import styles from "./tracks.module.css";
 import { TrackType } from "@/sharedTypes/sharedTypes";
 import Track from "../Track/Track";
