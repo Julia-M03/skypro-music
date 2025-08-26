@@ -11,20 +11,20 @@ import type { TrackType } from "@/sharedTypes/sharedTypes";
 import useGetFavorites from "@/hooks/useGetFavorites";
 import useGetTracks from "@/hooks/useGetTracks";
 
+
 export default function Home() {
   const dispatch = useAppDispatch();
-
   const { isLoading } = useGetTracks();
   const { isLoadingFavorites } = useGetFavorites();
 
   const tracks = useAppSelector(
     (state: RootState): TrackType[] => state.tracks.tracks
-  );
+  )
 
   useEffect(() => {
     dispatch(setCurrentTrackList(tracks))
     dispatch(setCurrentPlaylist(tracks))
-  }, [tracks, dispatch]);
+  }, [tracks, dispatch])
 
   return (
     <>

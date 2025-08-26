@@ -24,16 +24,11 @@
 
 .badge {
   font-size: 13px;
-  line-height: 10px;
+  line-height: 8px;
   padding: 8px 9px;
   border-radius: 15px;
   background: #b672ff;
   color: #fff;
-}
-
-.caret {
-  width: 10px;
-  height: 6px;
 }
 
 .filter__title {
@@ -105,5 +100,3 @@
   -webkit-appearance: none;
   appearance: none;
 }
-
-

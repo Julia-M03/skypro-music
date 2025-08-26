@@ -39,7 +39,6 @@ export default function SignUp() {
             email: watch("login"),
             password: watch("password"),
           }).then((token) => {
-            console.log("Токен получен:", token);
             dispatch(setAccessToken(token.access));
             dispatch(setRefreshToken(token.refresh));
           });

@@ -20,7 +20,6 @@ export const getTracksSelection = ({
 }
 
 export const tracksGetFavorites = (token: string): Promise<TrackType[]> => {
-  console.log("tracksGetFavorites ", token);
   return axios
     .get(`${BASE_URL}/catalog/track/favorite/all/`, {
       headers: {
