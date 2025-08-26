@@ -7,10 +7,9 @@ import Tracks from "../Tracks/Tracks";
 
 type CenterBlockProps = {
     header: string;
-    selectId?: number;
 };
 
-export default function CenterBlock({ header, selectId }: CenterBlockProps) {
+export default function CenterBlock({ header }: CenterBlockProps) {
     return (
         <div className={styles.centerblock}>
 
@@ -31,7 +30,7 @@ export default function CenterBlock({ header, selectId }: CenterBlockProps) {
                         </svg>
                     </div>
                 </div>
-                <Tracks selectId={selectId} />
+                <Tracks />
             </div>
         </div>
     );

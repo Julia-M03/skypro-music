@@ -1,65 +1,99 @@
+.filter__button_group {
+  position: relative;
+  cursor: pointer;
+}
+
 .filter__button {
-  font-style: normal;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
   font-weight: 400;
   font-size: 16px;
   line-height: 24px;
-  border: 1px solid #ffffff;
+  background: transparent;
+  color: #fff;
+  border: 1px solid #fff;
   border-radius: 60px;
   padding: 6px 20px;
-  color: white;
-  margin: 0;
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
 }
-.filter__button_active {
+
+.filter__button:hover {
   border-color: #b672ff;
   color: #b672ff;
+}
+
+.badge {
+  font-size: 13px;
+  line-height: 10px;
+  padding: 8px 9px;
+  border-radius: 15px;
+  background: #b672ff;
+  color: #fff;
+}
+
+.caret {
+  width: 10px;
+  height: 6px;
+}
+
+.filter__title {
+  cursor: default;
 }
 
 .filter__dropdown {
   position: absolute;
   margin-top: 10px;
+  z-index: 1000;
   width: max-content;
   max-height: 305px;
-  -webkit-box-sizing: border-box;
-  padding: 34px;
+  box-sizing: border-box;
+  padding: 16px 20px;
   border-radius: 12px;
   background: #313131;
+  cursor: default;
+  top: calc(100% + 10px);
+  left: 0;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.filter__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+  color: #fff;
 }
 
 .filter__list {
   color: white;
   display: flex;
-  gap: 28px;
+  gap: 24px;
   height: max-content;
   max-height: 237px;
   overflow-y: auto;
   flex-direction: column;
   width: max-content;
   max-width: 248px;
+}
 
-  &::-webkit-scrollbar {
-    width: 4px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: rgba(75, 73, 73, 1);
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: white;
-  }
+.filter__list::-webkit-scrollbar {
+  width: 4px;
+}
+.filter__list::-webkit-scrollbar-track {
+  background-color: rgba(75, 73, 73, 1);
+}
+.filter__list::-webkit-scrollbar-thumb {
+  background-color: #fff;
 }
 
 .filter__list_element {
+ display: flex;
+  gap: 8px;
+  align-items: center;
   color: #fff;
-  font-size: 20px;
-  font-style: normal;
-  font-weight: 400;
+  font-size: 16px;
   line-height: 24px;
-  padding-right: 20px;
+  cursor: pointer;
 }
 
 .filter__list_element:hover {
@@ -67,7 +101,9 @@
   text-decoration-line: underline;
 }
 
-.filter__button_group {
-  position: relative;
-  cursor: pointer;
+.option__checkbox {
+  -webkit-appearance: none;
+  appearance: none;
 }
+
+

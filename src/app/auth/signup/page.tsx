@@ -43,7 +43,7 @@ export default function SignUp() {
             dispatch(setAccessToken(token.access));
             dispatch(setRefreshToken(token.refresh));
           });
-          router.push("/music/main");
+          router.push("/music");
         }
         if (res.status.toString().startsWith("4")) {
           alert("Неверный логин или пароль");

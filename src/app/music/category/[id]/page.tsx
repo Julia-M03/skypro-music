@@ -5,12 +5,15 @@ import { useEffect } from "react";
 import { getTracksSelection } from "@/services/tracks/tracksApi";
 import { useState } from "react";
 import { useAppDispatch } from "@/store/store";
-import { setCurrentTrackList } from "@/store/features/trackSlice";
+import { setCurrentPlaylist, setCurrentTrackList } from "@/store/features/trackSlice";
 import { useSelector } from "react-redux";
 import { RootState } from "@/store/store";
 import CenterBlock from "@/components/CenterBlock/CenterBlock";
 import Loading from "../../loading";
 import { TrackType } from "@/sharedTypes/sharedTypes";
+import useInitAuth from "@/hooks/useInitAuth";
+import useGetFavorites from "@/hooks/useGetFavorites";
+import useGetTracks from "@/hooks/useGetTracks";
 
 
 export default function CategoryPage() {
@@ -26,12 +29,22 @@ export default function CategoryPage() {
     return tracks.filter((track) => playListItems.includes(track._id))
   };
 
+  useGetTracks();
+  useGetFavorites();
+
   useEffect(() => {
+    if (!tracks)
+      return
+
     const getSelection = async () => {
       try {
         const response = await getTracksSelection({ id: Number(id) + 1 })
         setPlayListName(response.name)
-        dispatch(setCurrentTrackList(formTrackList(tracks, response.items)))
+
+        const catalog = formTrackList(tracks, response.items)
+
+        dispatch(setCurrentTrackList(catalog));
+        dispatch(setCurrentPlaylist(catalog));
       } catch (error) {
         console.error("Ошибка при получении плейлиста:", error)
       } finally {
@@ -39,7 +52,7 @@ export default function CategoryPage() {
       }
     }
     getSelection()
-  }, [id])
+  }, [id, tracks])
 
   if (isLoading) {
     return <Loading />

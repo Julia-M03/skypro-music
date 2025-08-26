@@ -5,4 +5,3 @@ export default function Loading() {
     <div className={styles.loading}> Загрузка </div>
   )
 }
-
