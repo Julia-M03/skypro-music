@@ -1,3 +1,5 @@
+"use client";
+
 import Link from "next/link";
 import Image from 'next/image';
 import styles from "./sidebar.module.css";
@@ -20,7 +22,7 @@ export default function Sidebar() {
         <div className={styles.main__sidebar}>
             <div className={styles.sidebar__personal}>
                 <div className={styles.sidebar__upperblock} onClick={handleLogout}>
-                    <p className={styles.sidebar__personalName}>{userName}</p>
+                    <p className={styles.sidebar__personalName}>{userName || "Инкогнито"}</p>
                     <div className={styles.sidebar__icon}>
                         <svg>
                             <use xlinkHref="/img/icon/sprite.svg#logout"></use>
@@ -37,7 +39,7 @@ export default function Sidebar() {
                                 src="/img/playlist01.png"
                                 alt="day's playlist"
                                 width={250}
-                                height={170}
+                                height={150}
                             />
                         </Link>
                     </div>
@@ -48,7 +50,7 @@ export default function Sidebar() {
                                 src="/img/playlist02.png"
                                 alt="day's playlist"
                                 width={250}
-                                height={170}
+                                height={150}
                             />
                         </Link>
                     </div>
@@ -59,7 +61,7 @@ export default function Sidebar() {
                                 src="/img/playlist03.png"
                                 alt="day's playlist"
                                 width={250}
-                                height={170}
+                                height={150}
                             />
                         </Link>
                     </div>

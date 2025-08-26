@@ -1,18 +1,18 @@
+"use client";
+
 import styles from "./tracks.module.css";
 import { TrackType } from "@/sharedTypes/sharedTypes";
 import Track from "../Track/Track";
 import { useSelector } from "react-redux";
-import { RootState } from "@/store/store";
+import { selectVisibleTracks } from "@/store/selectors/tracksSelectors";
+
 
 type TrackListProps = {
-    selectId?: number;
     tracks?: TrackType[];
 }
 
-export default function Tracks({ selectId }: TrackListProps) {
-    const tracks = useSelector(
-        (state: RootState): TrackType[] => state.tracks.currentTrackList
-    );
+export default function Tracks({ }: TrackListProps) {
+  const tracks = useSelector(selectVisibleTracks);
 
     return (
         <div className={styles.content__playlist}>
