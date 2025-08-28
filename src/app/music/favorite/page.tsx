@@ -12,14 +12,14 @@ export default function Favorite() {
   const dispatch = useAppDispatch();
   const favoriteTracks = useAppSelector(
     (state: RootState): TrackType[] => state.tracks.favoriteTracks
-  );
+  )
 
-  const { isLoadingFavorites } = useGetFavorites();
-
+  const { isLoadingFavorites } = useGetFavorites()
+  
   useEffect(() => {
-    dispatch(setCurrentTrackList(favoriteTracks));
-    dispatch(setCurrentPlaylist(favoriteTracks));
-  }, [favoriteTracks, isLoadingFavorites]);
+    dispatch(setCurrentTrackList(favoriteTracks))
+    dispatch(setCurrentPlaylist(favoriteTracks))
+  }, [favoriteTracks, isLoadingFavorites])
 
   return <CenterBlock header="Мой плейлист" />
 }

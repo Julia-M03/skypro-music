@@ -15,16 +15,11 @@ export default function Navigation() {
   const { accessToken } = useAppSelector((state) => state.auth);
 
   const handleLogout = () => {
-    dispatch(clearUser());
-    // if (!accessToken) {
-    //   router.push("/auth/signin");
-    // } else {
-    //  router.push("/music");
-    // }
-  };
+    dispatch(clearUser())
+  }
 
   const switchMenu = () => {
-    setIsOpen(!isOpen);
+    setIsOpen(!isOpen)
   }
 
   return (

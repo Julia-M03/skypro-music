@@ -7,7 +7,7 @@ import Tracks from "../Tracks/Tracks";
 
 type CenterBlockProps = {
     header: string;
-};
+}
 
 export default function CenterBlock({ header }: CenterBlockProps) {
     return (
@@ -33,5 +33,5 @@ export default function CenterBlock({ header }: CenterBlockProps) {
                 <Tracks />
             </div>
         </div>
-    );
-};
+    )
+}

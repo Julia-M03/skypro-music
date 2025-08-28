@@ -19,7 +19,7 @@ export default function useGetFavorites(): IHookResult {
 
   const [isLoadingFavorites, setIsLoadingFavorites] = useState(
     accessToken ? true : false
-  );
+  )
 
   useEffect(() => {
     if (!accessToken)
@@ -32,16 +32,16 @@ export default function useGetFavorites(): IHookResult {
           refreshToken,
           dispatch
         ).then((favoritesResponse) => {
-          dispatch(setFavoriteTracks(favoritesResponse));
-        });
-      };
-      fetchFavoriteTracks();
+          dispatch(setFavoriteTracks(favoritesResponse))
+        })
+      }
+      fetchFavoriteTracks()
     } catch (error) {
-      console.error("Ошибка при получении избранных треков: ", error);
+      console.error("Ошибка при получении избранных треков: ", error)
     } finally {
-      setIsLoadingFavorites(false);
+      setIsLoadingFavorites(false)
     }
-  }, [accessToken]);
+  }, [accessToken])
 
   return { isLoadingFavorites }
 }

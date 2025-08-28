@@ -11,7 +11,6 @@ import { RootState } from "@/store/store";
 import CenterBlock from "@/components/CenterBlock/CenterBlock";
 import Loading from "../../loading";
 import { TrackType } from "@/sharedTypes/sharedTypes";
-import useInitAuth from "@/hooks/useInitAuth";
 import useGetFavorites from "@/hooks/useGetFavorites";
 import useGetTracks from "@/hooks/useGetTracks";
 
@@ -48,7 +47,7 @@ export default function CategoryPage() {
       } catch (error) {
         console.error("Ошибка при получении плейлиста:", error)
       } finally {
-        setIsLoading(false);
+        setIsLoading(false)
       }
     }
     getSelection()

@@ -96,11 +96,11 @@ const trackSlice = createSlice({
         if (state.isShuffle)
           nextIndex = 0;
         else
-          state.currentTrack.isPlaying = false;
+          state.currentTrack.isPlaying = false
       }
       state.currentTrack.track = playList[nextIndex]
         ? playList[nextIndex]
-        : state.currentTrack.track;
+        : state.currentTrack.track
     },
     setPrevTrack(state) {
       const playList = state.isShuffle
@@ -112,7 +112,7 @@ const trackSlice = createSlice({
       const nextIndex = currentIndex - 1;
       state.currentTrack.track = playList[nextIndex]
         ? playList[nextIndex]
-        : state.currentTrack.track;
+        : state.currentTrack.track
     },
     toggleShuffle: (state) => {
       state.isShuffle = !state.isShuffle;
@@ -133,7 +133,7 @@ const trackSlice = createSlice({
       state.filters = { query: "", artists: [], years: [], genres: [] };
     },
   },
-});
+})
 
 export const { setTracks, setCurrentTrack, togglePlay, stopPlayback, setCurrentPlaylist, setNextTrack, setPrevTrack, toggleShuffle, setCurrentTrackList, setFavoriteTracks, addLikedTracks, removeLikedTracks, setFilterQuery, setArtistFilters, setYearFilters, setGenreFilters, resetFilters } = trackSlice.actions;
 export const trackSliceReducer = trackSlice.reducer;
