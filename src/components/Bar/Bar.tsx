@@ -14,7 +14,7 @@ export default function Bar() {
   const [isLoop, setIsLoop] = useState(false);
   const [currentTime, setCurrentTime] = useState(0);
   const [isLoadedTrack, setIsLoadedTrack] = useState(false);
-  const [volume, setVolume] = useState(0.5);
+  const [ _, setVolume] = useState(0.5);
   const [isShuffled, setIsShuffled] = useState(false)
   const audioRef = useRef<HTMLAudioElement>(null);
 
